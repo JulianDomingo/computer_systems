@@ -36,4 +36,27 @@
     * Code is **not** binary compatible; different machines and different OS have differences in their coding conventions.
 * **Bit Level Operations**
     * Masking: a mask is a bit pattern that indicates a selected set of bits within a word.
-    *     
+* **Logical Shifts**
+    * Logical: fills the left end with *k* zeros
+    * Arithmetic: fills the left end with *k* repetitions of the most significant bit before the shift (i.e. [x<sub>w - 1</sub>, ..., x<sub>w - 2</sub> ..., x<sub>k</sub>])
+* **Operator Precendence**: always place parentheses when writing a long mathematical expression with multiple operator types.
+#### 2.2 - Integer Representations
+* **Conversion between signed and unsigned** 
+    * C keeps the underlying bit representation the same.
+        * I.e. for a 32-bit machine, unsigned max (4294967295) is -1 when casted to an int. 
+    * All numbers are **signed by default**.
+        * Must specify **u** during initialization to make unsigned (i.e. int x = 12u;)
+    * Conversion can happen **both implicitly and explicitly**:
+        * Implicit: data type x is converted to data type y when x is assigned to a variable of data type y
+        * Explicit: casting
+* **Bit Extension**
+    * Add leading zeros to unsigned values
+    * Add leading MSB values to 2's-complement values
+* Benefit of shifting right *k* times, then shifting left *k* times:
+    * Logical shifts: acts as an **in-place mask**
+    * Arithmetic shifts: same as logical, but includes sign extension.
+* **Bit Truncation**
+    * **Truncation can cause overflow for signed integers** 
+        * Pay attention to the numerical size of the un-truncated value, and ensure overflow doesn't occur if the value were to be truncated somewhere in the application code. 
+* **Avoid use of unsigned numbers when possible for mathematical operations**.
+    * Unsigned values are useful when we want to think of words as just collections of bits *with no numeric interpretation*, or implementing mathematical packages.
